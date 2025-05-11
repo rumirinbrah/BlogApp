@@ -19,9 +19,7 @@ import com.zzz.blogtemp.feature_blog.presentation.ReadBlogPage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Navigation(
-
-) {
+fun Navigation() {
     val navController = rememberNavController()
 
     Scaffold(

@@ -1,17 +1,15 @@
 package com.zzz.blogtemp.feature_blog.presentation.components
 
+import android.os.Build
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Shapes
@@ -25,6 +23,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.zzz.blogtemp.feature_blog.domain.model.Blog
 import com.zzz.blogtemp.ui.theme.BlogTempTheme
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Date
+import java.util.Locale
 
 @Composable
 fun BlogItem(
@@ -35,6 +38,7 @@ fun BlogItem(
     modifier: Modifier = Modifier,
 ) {
 
+    println(blog.date)
     Row(
         modifier
             .fillMaxWidth()
@@ -52,7 +56,7 @@ fun BlogItem(
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
             Text(blog.title, style = MaterialTheme.typography.titleMedium, color = onBackground)
-            Text(blog.date, style = MaterialTheme.typography.bodySmall,color = onBackground.copy(alpha = 0.5f))
+            Text(blog.date.toFormattedDate(), style = MaterialTheme.typography.bodySmall,color = onBackground.copy(alpha = 0.5f))
         }
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowForward ,
@@ -61,6 +65,18 @@ fun BlogItem(
         )
     }
 
+
+}
+
+private fun String.toFormattedDate() : String{
+
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        val date = LocalDateTime.parse(this, DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+        val formatter = DateTimeFormatter.ofPattern("MMM dd yyyy",Locale.getDefault())
+        return formatter.format(date)
+    }else{
+        return this
+    }
 
 }
 
