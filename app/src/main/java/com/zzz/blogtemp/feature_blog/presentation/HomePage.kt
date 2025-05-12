@@ -16,7 +16,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,11 +32,10 @@ fun HomePage(
 ) {
 
     val blogs by blogViewModel.blogs.collectAsStateWithLifecycle()
+    val cachedBlogs by blogViewModel.cachedBlogs.collectAsStateWithLifecycle()
+
     val state by blogViewModel.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
-        //blogViewModel.onAction(HomeActions.OnLoadBlogs)
-    }
 
     Column(
         Modifier.fillMaxSize()
@@ -57,7 +55,7 @@ fun HomePage(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(
-                    blogs,
+                    cachedBlogs,
                     key = {
                         it.id
                     }

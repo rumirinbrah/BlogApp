@@ -1,6 +1,7 @@
 package com.zzz.blogtemp.feature_blog.data.remote.dto
 
 import com.zzz.blogtemp.feature_blog.domain.model.Blog
+import com.zzz.blogtemp.feature_blog.domain.model.BlogEntity
 import kotlinx.serialization.Serializable
 
 //@Serializable
@@ -16,6 +17,13 @@ data class Title(
 )
 fun BlogDto.toBlog() =
     Blog(
+        id = id,
+        date = date,
+        title = title.rendered,
+        link = link
+    )
+fun BlogDto.toBlogEntity() =
+    BlogEntity(
         id = id,
         date = date,
         title = title.rendered,

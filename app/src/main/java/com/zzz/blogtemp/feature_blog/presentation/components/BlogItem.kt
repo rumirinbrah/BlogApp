@@ -21,24 +21,21 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.zzz.blogtemp.feature_blog.domain.model.Blog
+import com.zzz.blogtemp.feature_blog.domain.model.BlogEntity
 import com.zzz.blogtemp.ui.theme.BlogTempTheme
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Date
 import java.util.Locale
 
 @Composable
 fun BlogItem(
-    blog: Blog,
+    blog: BlogEntity,
     background : Color,
     onBackground : Color,
     onClick:(String)->Unit,
     modifier: Modifier = Modifier,
 ) {
 
-    println(blog.date)
     Row(
         modifier
             .fillMaxWidth()
